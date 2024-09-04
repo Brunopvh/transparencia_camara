@@ -3,7 +3,7 @@ import 'package:transparencia_camara/api_dados/api_controller.dart';
 import 'package:transparencia_camara/api_dados/api_interface.dart';
 import 'package:transparencia_camara/api_dados/api_repository.dart';
 
-class HttpBindings implements Bindings {
+class ApiBindings implements Bindings {
 
   @override
   void dependencies(){

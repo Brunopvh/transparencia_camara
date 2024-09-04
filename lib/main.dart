@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:transparencia_camara/api_dados/api_bindings.dart';
 import 'package:transparencia_camara/screens/home_page.dart';
 import 'package:transparencia_camara/screens/list_proposicoes.dart';
 import 'package:transparencia_camara/screens/page_depudato_estadual.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: '/',
+      initialBinding: ApiBindings(),
       getPages: [
         GetPage(
               name: '/', 

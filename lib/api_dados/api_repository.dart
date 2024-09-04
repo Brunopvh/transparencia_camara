@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:transparencia_camara/api_dados/api_interface.dart';
 import 'package:transparencia_camara/models/api_models.dart';
 import 'package:http/http.dart' as http;
@@ -8,23 +9,27 @@ String urlAutores = 'https://dadosabertos.camara.leg.br/arquivos/proposicoesAuto
 
 //========================================================================//
 // Implementar proposição - obter uma lista de objetos 
+// CORRIGIR ERRO
 //========================================================================//
 class ProposicoesRepository implements IPropocicaoRepository {
 
   @override
   Future<List<ProposicaoModel>> findAllProposicoes() async {
-    final responseEmenta = await http.get(Uri.parse(urlProposicoes));
-    final Map<String, dynamic> responseMap = jsonDecode(responseEmenta.body);
+    // Baixar as informações
+    var response = http.get(Uri.parse(urlProposicoes));
+    var responseEmenta = await response;
+    Map<String, dynamic> responseMap = jsonDecode(responseEmenta.body);
 
-    List<Map<String, dynamic>> ementasList = responseMap['dados'];
+    List<dynamic> ementasList = responseMap['dados'];
     int max = ementasList.length;
+    
     List<ProposicaoModel> ementas = [];
     for(int i=0; i<max; i++){
       ementas.add(
         ProposicaoModel.fromMap(ementasList[i])
       );
     }
-
+    print(ementas);
     return ementas;
   }
 }

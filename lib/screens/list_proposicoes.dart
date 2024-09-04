@@ -7,6 +7,8 @@ import 'package:transparencia_camara/models/api_models.dart';
 
 class PageProposicoes extends GetView<ProposicoesController> {
 
+    
+
   @override
   Widget build(BuildContext context){
     return Scaffold(

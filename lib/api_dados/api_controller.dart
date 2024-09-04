@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:transparencia_camara/api_dados/api_interface.dart';
+import 'package:transparencia_camara/api_dados/api_repository.dart';
 
 
 class ProposicoesController extends GetxController with StateMixin {
@@ -18,10 +19,11 @@ class ProposicoesController extends GetxController with StateMixin {
 
     try {
       final dados = await this._proposicaoRepository.findAllProposicoes();
+      print(dados.first);
       change(dados, status: RxStatus.success());
     } catch (e){
       print(e);
-      change([], status: RxStatus.error('Erro ao se conectar a API - tente novamente.'));
+      change([], status: RxStatus.error('Erro ao se conectar a API - [ ${e} ]'));
     }
   }
   
