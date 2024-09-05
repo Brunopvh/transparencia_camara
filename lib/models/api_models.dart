@@ -6,25 +6,46 @@ import 'dart:io';
 // EMENTA MODEL
 //========================================================================//
 class ProposicaoModel {
+  String id;
+  String ano;
+  String uri;
+  String dataApresentacao;
   String siglaTipo;
+  String descricaoTipo;
   String ementa;
+  
   ProposicaoModel({
+    required this.id,
+    required this.ano,
+    required this.uri,
+    required this.dataApresentacao,
     required this.siglaTipo,
+    required this.descricaoTipo,
     required this.ementa,
   });
+  
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
+      'ano': ano,
+      'uri': uri,
+      'data': dataApresentacao,
       'siglaTipo': siglaTipo,
+      'descricaoTipo': descricaoTipo,
       'ementa': ementa,
     };
   }
 
   factory ProposicaoModel.fromMap(Map<String, dynamic> map) {
     return ProposicaoModel(
-      
-      siglaTipo: map['siglaTipo'],
-      ementa: map['ementa'],
+      id: map['id'].toString(),
+      ano: map['ano'].toString(),
+      uri: map['uri'].toString(),
+      dataApresentacao: map['dataApresentacao'].toString(),
+      siglaTipo: map['siglaTipo'] as String,
+      descricaoTipo: map['descricaoTipo'] as String,
+      ementa: map['ementa'] as String,
     );
   }
 
