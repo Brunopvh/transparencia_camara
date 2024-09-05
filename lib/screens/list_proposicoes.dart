@@ -7,8 +7,6 @@ import 'package:transparencia_camara/models/api_models.dart';
 
 class PageProposicoes extends GetView<ProposicoesController> {
 
-    
-
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -17,10 +15,10 @@ class PageProposicoes extends GetView<ProposicoesController> {
                 return ListView.builder(
                       itemCount: state.length,
                       itemBuilder: (_, index){
-                        final ProposicaoModel item = state[index];
+                        ProposicaoModel item = state[index];
                         return ListTile(
                                 title: Text(item.ementa),
-                                subtitle: Text(item.id),
+                                subtitle: Text(item.siglaTipo),
                         );
                       }
 
@@ -31,7 +29,7 @@ class PageProposicoes extends GetView<ProposicoesController> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                            Text(error.toString()),
+                            Text(error!),
 
                         ],
                       ),

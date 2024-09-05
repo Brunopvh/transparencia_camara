@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:transparencia_camara/api_dados/api_interface.dart';
 import 'package:transparencia_camara/api_dados/api_repository.dart';
+import 'package:transparencia_camara/models/api_models.dart';
 
 
 class ProposicoesController extends GetxController with StateMixin {
@@ -18,7 +19,7 @@ class ProposicoesController extends GetxController with StateMixin {
     change([], status: RxStatus.loading());
 
     try {
-      final dados = await this._proposicaoRepository.findAllProposicoes();
+      var dados = await this._proposicaoRepository.findAllProposicoes();
       print(dados.first);
       change(dados, status: RxStatus.success());
     } catch (e){

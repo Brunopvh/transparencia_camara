@@ -4,7 +4,8 @@ import 'package:transparencia_camara/api_dados/api_interface.dart';
 import 'package:transparencia_camara/models/api_models.dart';
 import 'package:http/http.dart' as http;
 
-String urlProposicoes = 'https://dadosabertos.camara.leg.br/arquivos/proposicoesTemas/json/proposicoesTemas-2024.json';
+String urlTemas = 'https://dadosabertos.camara.leg.br/arquivos/proposicoesTemas/json/proposicoesTemas-2024.json';
+String urlProposicoes = 'https://dadosabertos.camara.leg.br/arquivos/proposicoes/json/proposicoes-2024.json';
 String urlAutores = 'https://dadosabertos.camara.leg.br/arquivos/proposicoesAutores/json/proposicoesAutores-2024.json';
 
 //========================================================================//
@@ -19,17 +20,15 @@ class ProposicoesRepository implements IPropocicaoRepository {
     var response = http.get(Uri.parse(urlProposicoes));
     var responseEmenta = await response;
     Map<String, dynamic> responseMap = jsonDecode(responseEmenta.body);
-
-    List<dynamic> ementasList = responseMap['dados'];
-    int max = ementasList.length;
-    
     List<ProposicaoModel> ementas = [];
-    for(int i=0; i<max; i++){
-      ementas.add(
-        ProposicaoModel.fromMap(ementasList[i])
-      );
-    }
-    print(ementas);
+    List<dynamic> ementasList = responseMap['dados'];
+    
+    // Converter os dados da lista em Models.
+    ementasList.forEach((element) {
+      ementas.add(ProposicaoModel.fromMap(element));
+    },
+    );
+
     return ementas;
   }
 }
