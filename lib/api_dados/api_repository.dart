@@ -31,6 +31,27 @@ class ProposicoesRepository implements IPropocicaoRepository {
 
     return ementas;
   }
+
+  List<ProposicaoModel> getProposicoesIds({required List<String> ids}){
+    List<ProposicaoModel> filtroProposicoes = [];
+
+    int maxIds = ids.length;
+    this.findAllProposicoes().then((value) {
+        // Percorrer por todas as proposições
+        value.forEach((element) {
+          // Verificar se a proposição atual tem um ID correspondênte na lista.
+          for(int i=0; i<maxIds; i++){
+            if(ids[i].toString() == element.id){
+              filtroProposicoes.add(element);
+            }
+          }
+
+        },);
+      },
+    );
+
+    return filtroProposicoes;
+  }
 }
 
 
@@ -43,17 +64,34 @@ class AutoresRepsitory implements IAutorRepository {
   Future<List<AutorModel>> findAllAutores() async {
     List<AutorModel> autores = [];
 
-    final responseAutores = await http.get(Uri.parse(urlAutores));
+    var response = http.get(Uri.parse(urlAutores));
+    var responseAutores = await response;
     final Map<String, dynamic> responseAutoresMap = jsonDecode(responseAutores.body);
-    List<Map<String, dynamic>> autoresList = responseAutoresMap['dados'];
-    int maxNum = autoresList.length;
-
-    for(int i=0; i<maxNum; i++){
-      autores.add(
-        AutorModel.fromMap(autoresList[i])
-      );
-    }
+    List<dynamic> autoresList = responseAutoresMap['dados'];
+    
+    // Converter os dados da lista em Models.
+    autoresList.forEach((element) {
+      autores.add(AutorModel.fromMap(element));
+    },
+    );
 
     return autores;
+  }
+
+  List<String> getAutorIds({required String nome}){
+    List<String> idsAutor = [];
+
+    this.findAllAutores().then((value) {
+          value.forEach((element) {
+              // Filtrar todos os IDS por nome do autor
+              if(element.nomeAutor == nome){
+                idsAutor.add(element.idProposicao.toString());
+              }
+            },
+        );
+        },
+    );
+
+    return idsAutor;
   }
 }

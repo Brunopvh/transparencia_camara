@@ -12,5 +12,8 @@ class ApiBindings implements Bindings {
     
     Get.put(ProposicoesController(Get.find()));
     Get.put(AutoresController(Get.find()));
+
+    Get.put(ProposicoesFiltroController(Get.find()));
+    Get.put(AutoresFiltroController(Get.find()));
   }
 }

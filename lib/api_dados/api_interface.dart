@@ -5,6 +5,7 @@ import 'package:transparencia_camara/models/api_models.dart';
 abstract class IPropocicaoRepository {
 
   Future<List<ProposicaoModel>> findAllProposicoes();
+  List<ProposicaoModel> getProposicoesIds({required List<String> ids});
 }
 
 
@@ -12,4 +13,5 @@ abstract class IPropocicaoRepository {
 abstract class IAutorRepository {
 
   Future<List<AutorModel>> findAllAutores();
+  List<String> getAutorIds({required String nome});
 }

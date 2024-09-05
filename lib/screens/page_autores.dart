@@ -3,14 +3,24 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:transparencia_camara/api_dados/api_controller.dart';
+import 'package:transparencia_camara/api_dados/api_repository.dart';
 import 'package:transparencia_camara/models/api_models.dart';
+import 'package:transparencia_camara/models/deputados_model.dart';
 
-class PageProposicoes extends GetView<ProposicoesController> {
+class PageAutores extends GetView<ProposicoesFiltroController> {
 
+  String nome;
+  List<String> ids = [];
+  PageAutores({required this.nome}){
+    this.ids = AutoresRepsitory().getAutorIds(nome: this.nome);
+    this.controller.ids = this.ids;
+  }
+
+ 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-            appBar: AppBar(title: Text('Proposições (todas)'),),
+            appBar: AppBar(title: Text('Proposições (por autor)'),),
             body: controller.obx((state){
                 return ListView.builder(
                       itemCount: state.length,
